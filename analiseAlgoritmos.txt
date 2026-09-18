@@ -1,0 +1,66 @@
+====================================================================
+INSTITUIÇÃO: UNIPÊ – COMPLEXIDADE E COMPUTABILIDADE DE ALGORITMO
+PROFESSOR: Carlos Herriot Fernandes Da Silva Junior
+DISCIPLINA: Computabilidade e Complexidade de Algoritmos
+REFERENTE: Relatório de Complexidade e Tempo
+====================================================================
+
+--------------------------------------------------------------------
+1. FUNÇÃO 1: CONTAGEM DE OCORRÊNCIAS DISTINTAS
+Responsável:
+--------------------------------------------------------------------
+A) Pseudocódigo:
+
+B) Complexidade Linha a Linha:
+
+C) Expressão de Complexidade Total e Big O:
+
+D) Cálculo de Tempo:
+
+--------------------------------------------------------------------
+2. FUNÇÃO 2: ANÁLISE DE PARES EM MATRIZ TRIANGULAR
+Responsável:
+--------------------------------------------------------------------
+A) Pseudocódigo:
+
+B) Complexidade Linha a Linha:
+
+C) Expressão de Complexidade Total e Big O:
+
+D) Cálculo de Tempo:
+
+--------------------------------------------------------------------
+3. FUNÇÃO 3: COMPARAÇÃO DE MATRIZES TRIDIMENSIONAIS
+Responsável: 
+--------------------------------------------------------------------
+A) Pseudocódigo:
+
+B) Complexidade Linha a Linha:
+
+C) Expressão de Complexidade Total e Big O:
+
+D) Cálculo de Tempo:
+
+--------------------------------------------------------------------
+4. FUNÇÃO 4: ANÁLISE DE CASOS ASSIMÉTRICOS NO CONDICIONAL
+Responsável: 
+--------------------------------------------------------------------
+A) Pseudocódigo:
+
+B) Complexidade Linha a Linha:
+
+C) Expressão de Complexidade Total e Big O:
+
+D) Cálculo de Tempo:
+
+--------------------------------------------------------------------
+5. FUNÇÃO 5: CONTAGEM DE ELEMENTOS EM VETOR ORDENADO (BUSCA BINÁRIA)
+Responsável:
+--------------------------------------------------------------------
+A) Pseudocódigo:
+
+B) Complexidade Linha a Linha:
+
+C) Expressão de Complexidade Total e Big O:
+
+D) Cálculo de Tempo:
