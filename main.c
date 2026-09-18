@@ -19,7 +19,7 @@
    SEÇÃO 2: IMPLEMENTAÇÃO DAS FUNÇÕES (DIVISÃO DA EQUIPE)
    ======================================================== */
 
-/* --- RESPONSÁVEL: Adicione o seu nome --- */
+/* --- RESPONSÁVEL: Daniela Gomes --- */
 // Função 1: Contagem de Ocorrências Distintas
     // TODO: Implementar a lógica da Função 1
     // Lembre de seguir as regras de complexidade e o cálculo de tempo 
