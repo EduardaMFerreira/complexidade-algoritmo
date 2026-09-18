@@ -7,7 +7,7 @@ REFERENTE: Relatório de Complexidade e Tempo
 
 --------------------------------------------------------------------
 1. FUNÇÃO 1: CONTAGEM DE OCORRÊNCIAS DISTINTAS
-Responsável:
+Responsável: DANIELA GOMES
 --------------------------------------------------------------------
 A) Pseudocódigo:
 
