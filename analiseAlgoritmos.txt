@@ -1,66 +1,214 @@
 ====================================================================
-INSTITUIÇÃO: UNIPÊ – COMPLEXIDADE E COMPUTABILIDADE DE ALGORITMO
+INSTITUIÇÃO: UNIPÊ – Centro Universitário de João Pessoa
 PROFESSOR: Carlos Herriot Fernandes Da Silva Junior
 DISCIPLINA: Computabilidade e Complexidade de Algoritmos
 REFERENTE: Relatório de Complexidade e Tempo
 ====================================================================
 
---------------------------------------------------------------------
-1. FUNÇÃO 1: CONTAGEM DE OCORRÊNCIAS DISTINTAS
-Responsável: DANIELA GOMES
---------------------------------------------------------------------
-A) Pseudocódigo:
 
-B) Complexidade Linha a Linha:
+EQUIPE:
+1. Ana Clara de Queiroz Andrade
+2. Daniela Gomes de Oliveira
+3. Leandra Lima de Sousa
+4. Maria Eduarda de Moura Ferreira
+5. Thaís Rainara Marques de Morais
 
-C) Expressão de Complexidade Total e Big O:
 
-D) Cálculo de Tempo:
+====================================================================
+ORIENTAÇÕES DO RELATÓRIO
+====================================================================
 
---------------------------------------------------------------------
-2. FUNÇÃO 2: ANÁLISE DE PARES EM MATRIZ TRIANGULAR
-Responsável:
---------------------------------------------------------------------
-A) Pseudocódigo:
+Para cada função, apresentar:
 
-B) Complexidade Linha a Linha:
+A) Pseudocódigo da função;
 
-C) Expressão de Complexidade Total e Big O:
+B) Complexidade linha a linha, indicando a quantidade de operações
+   realizadas em cada instrução;
 
-D) Cálculo de Tempo:
+C) Expressão da complexidade total e sua classificação em Big O;
 
---------------------------------------------------------------------
-3. FUNÇÃO 3: COMPARAÇÃO DE MATRIZES TRIDIMENSIONAIS
-Responsável: 
---------------------------------------------------------------------
-A) Pseudocódigo:
+D) Cálculo do tempo de execução considerando que o computador
+   executa 10^8 instruções por segundo.
 
-B) Complexidade Linha a Linha:
 
-C) Expressão de Complexidade Total e Big O:
+====================================================================
+1. FUNÇÃO 1 — CONTAGEM DE OCORRÊNCIAS DISTINTAS
+====================================================================
 
-D) Cálculo de Tempo:
+Responsável: NOME COMPLETO
 
 --------------------------------------------------------------------
-4. FUNÇÃO 4: ANÁLISE DE CASOS ASSIMÉTRICOS NO CONDICIONAL
-Responsável: 
+A) Pseudocódigo
 --------------------------------------------------------------------
-A) Pseudocódigo:
 
-B) Complexidade Linha a Linha:
-
-C) Expressão de Complexidade Total e Big O:
-
-D) Cálculo de Tempo:
 
 --------------------------------------------------------------------
-5. FUNÇÃO 5: CONTAGEM DE ELEMENTOS EM VETOR ORDENADO (BUSCA BINÁRIA)
-Responsável:
+B) Complexidade Linha a Linha
 --------------------------------------------------------------------
-A) Pseudocódigo:
 
-B) Complexidade Linha a Linha:
 
-C) Expressão de Complexidade Total e Big O:
+--------------------------------------------------------------------
+C) Expressão da Complexidade Total e Big O
+--------------------------------------------------------------------
 
-D) Cálculo de Tempo:
+
+--------------------------------------------------------------------
+D) Cálculo de Tempo
+--------------------------------------------------------------------
+
+Entrada considerada:
+n = 50.000
+k = 4.000
+
+Taxa de execução:
+10^8 instruções por segundo
+
+Cálculo:
+
+
+====================================================================
+2. FUNÇÃO 2 — ANÁLISE DE PARES EM MATRIZ TRIANGULAR
+====================================================================
+
+Responsável: NOME COMPLETO
+
+--------------------------------------------------------------------
+A) Pseudocódigo
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+B) Complexidade Linha a Linha
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+C) Expressão da Complexidade Total e Big O
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+D) Cálculo de Tempo
+--------------------------------------------------------------------
+
+Entrada considerada:
+n = 500
+
+Taxa de execução:
+10^8 instruções por segundo
+
+Cálculo:
+
+
+====================================================================
+3. FUNÇÃO 3 — COMPARAÇÃO DE MATRIZES TRIDIMENSIONAIS
+====================================================================
+
+Responsável: NOME COMPLETO
+
+--------------------------------------------------------------------
+A) Pseudocódigo
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+B) Complexidade Linha a Linha
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+C) Expressão da Complexidade Total e Big O
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+D) Cálculo de Tempo
+--------------------------------------------------------------------
+
+Entrada considerada:
+n = 300
+
+Taxa de execução:
+10^8 instruções por segundo
+
+Cálculo:
+
+
+====================================================================
+4. FUNÇÃO 4 — ANÁLISE DE CASOS ASSIMÉTRICOS NO CONDICIONAL
+====================================================================
+
+Responsável: NOME COMPLETO
+
+--------------------------------------------------------------------
+A) Pseudocódigo
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+B) Complexidade Linha a Linha
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+C) Expressão da Complexidade Total e Big O
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+D) Cálculo de Tempo
+--------------------------------------------------------------------
+
+Entrada considerada:
+n = 50.000
+
+Cenário:
+Pior caso
+
+Taxa de execução:
+10^8 instruções por segundo
+
+Cálculo:
+
+
+====================================================================
+5. FUNÇÃO 5 — CONTAGEM DE ELEMENTOS EM VETOR ORDENADO
+====================================================================
+
+Responsável: NOME COMPLETO
+
+Observação:
+Esta função utiliza uma função auxiliar de Busca Binária para
+verificar se cada elemento do vetor A está presente no vetor B.
+
+--------------------------------------------------------------------
+A) Pseudocódigo
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+B) Complexidade Linha a Linha
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+C) Expressão da Complexidade Total e Big O
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+D) Cálculo de Tempo
+--------------------------------------------------------------------
+
+Entrada considerada:
+n = 10.000.000
+
+Taxa de execução:
+10^8 instruções por segundo
+
+Cálculo:
+
+
+====================================================================
+FIM DO RELATÓRIO
+====================================================================
