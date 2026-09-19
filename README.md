@@ -1,5 +1,5 @@
 # Projeto AV01 - Complexidade e Computabilidade de Algoritmos
-Repositório da equipa para o desenvolvimento da Avaliação 01 da disciplina de Complexidade e Computabilidade de Algoritmos.
+Repositório da equipe para o desenvolvimento da Avaliação 01 da disciplina de Complexidade e Computabilidade de Algoritmos.
 
 ## Equipe
 * [ClaraQrz](https://github.com/ClaraQrz) 
