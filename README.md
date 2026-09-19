@@ -24,3 +24,23 @@ O programa conta com um menu interativo onde o utilizador pode escolher qual fun
 3. **Comparação de Matrizes Tridimensionais:** Soma integralmente dois arranjos tridimensionais (n = 300 \times 300 \times 300) e compara os resultados.
 4. **Análise de Casos Assimétricos (Condicional):** Percorre um vetor (n = 50.000), somando diretamente os valores pares e calculando o fatorial dos valores ímpares no pior caso.
 5. **Contagem em Vetor Ordenado (Busca Binária):** Utiliza uma função auxiliar de busca binária para verificar quantos elementos de um vetor desordenado (n = 10.000.000$) estão presentes num vetor ordenado.
+
+---
+
+## Como executar
+1. **Clonar o repositório**
+No terminal, execute:
+> git clone git@github.com:EduardaMFerreira/complexidade-algoritmo.git
+
+Entre na pasta do projeto:
+> cd complexidade-algoritmo
+
+2. **Compilar o projeto**
+Utilize o compilador GCC:
+> gcc main.c -o main
+
+Se nenhum erro for apresentado, o programa foi compilado com sucesso. ✅
+
+3. Executar o programa
+No Git Bash, execute:
+> ./main

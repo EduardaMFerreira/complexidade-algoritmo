@@ -63,7 +63,7 @@
 
    ======================================================== */
 
-   
+
 /* --------------------------------------------------------
    FUNÇÃO 1: Contagem de Ocorrências Distintas
 
@@ -188,9 +188,55 @@
 
    ======================================================== */
 
-int main()
-{
-    // Menu do programa será implementado aqui
+int main() {
+    int opcao;
+
+    do
+    {
+        printf("\n========================================\n");
+        printf("       MENU - AVALIACAO 01\n");
+        printf("========================================\n");
+        printf("1. Contagem de Ocorrencias Distintas\n");
+        printf("2. Analise de Pares em Matriz Triangular\n");
+        printf("3. Comparacao de Matrizes Tridimensionais\n");
+        printf("4. Analise de Casos Assimétricos no Condicional\n");
+        printf("5. Contagem de Elementos em Vetor Ordenado\n");
+        printf("0. Sair\n");
+        printf("========================================\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao)
+        {
+            case 1:
+                printf("\nFuncao 1 selecionada.\n");
+                break;
+
+            case 2:
+                printf("\nFuncao 2 selecionada.\n");
+                break;
+
+            case 3:
+                printf("\nFuncao 3 selecionada.\n");
+                break;
+
+            case 4:
+                printf("\nFuncao 4 selecionada.\n");
+                break;
+
+            case 5:
+                printf("\nFuncao 5 selecionada.\n");
+                break;
+
+            case 0:
+                printf("\nEncerrando o programa...\n");
+                break;
+
+            default:
+                printf("\nOpcao invalida!\n");
+        }
+
+    } while (opcao != 0);
 
     return 0;
 }
