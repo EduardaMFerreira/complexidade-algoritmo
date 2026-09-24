@@ -38,7 +38,8 @@
 
    ======================================================== */
 
-
+/* --- Protótipo da Função 2 (Análise de Pares em Matriz Triangular) --- */
+int analisarParesMatriz(int n, int M[n][n]);
 
 
 /* ========================================================
@@ -93,6 +94,24 @@
 
 // Implementação da Função 2 aqui
 
+int analisarParesMatriz(int n, int M[n][n])
+{
+    int i, j;
+    int contador = 0;
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = i; j < n; j++)
+        {
+            if ((M[i][j] + M[j][i]) % 5 == 0)
+            {
+                contador++;
+            }
+        }
+    }
+
+    return contador;
+}
 
 /* --------------------------------------------------------
    FUNÇÃO 3: Comparação de Matrizes Tridimensionais
@@ -213,8 +232,71 @@ int main() {
                 break;
 
             case 2:
-                printf("\nFuncao 2 selecionada.\n");
-                break;
+               {
+                  printf("\nFuncao 2 selecionada.\n");
+
+                  int n;
+                  int i, j;
+                  int modo;
+                  int resultado;
+
+                  printf("Digite o tamanho da matriz: ");
+                  scanf("%d", &n);
+
+                  int matriz[n][n];
+
+                  printf("\nPreenchimento (1 = Manual, 2 = Aleatorio): ");
+                  scanf("%d", &modo);
+
+                  if (modo == 1)
+                  {
+                     printf("\nDigite os valores da matriz:\n");
+
+                     for (i = 0; i < n; i++)
+                     {
+                           for (j = 0; j < n; j++)
+                           {
+                              printf("M[%d][%d] = ", i, j);
+                              scanf("%d", &matriz[i][j]);
+                           }
+                     }
+                  }
+                  else
+                  {
+                     for (i = 0; i < n; i++)
+                     {
+                           for (j = 0; j < n; j++)
+                           {
+                              matriz[i][j] = rand() % 101;
+                           }
+                     }
+                  }
+
+                  printf("\nMatriz criada:\n");
+
+                  if (n <= 10)
+                  {
+                     for (i = 0; i < n; i++)
+                     {
+                           for (j = 0; j < n; j++)
+                           {
+                              printf("%5d ", matriz[i][j]);
+                           }
+
+                           printf("\n");
+                     }
+                  }
+                  else
+                  {
+                     printf("(Matriz muito grande para exibicao.)\n");
+                  }
+
+                  resultado = analisarParesMatriz(n, matriz);
+
+                  printf("\nResultado: %d\n", resultado);
+
+                  break;
+               }
 
             case 3:
                 printf("\nFuncao 3 selecionada.\n");
