@@ -44,6 +44,15 @@ void preencherAleatorio3D(int ***M, int n, int limiteInferior, int limiteSuperio
 void exibirMatriz3D(int ***M, int n, const char *nome);
 int compararMatrizes3D(int ***A, int ***B, int n);
 
+/* --- Protótipos da Função 4 (Análise de Casos Assimétricos / Fatorial) --- */
+int *alocarVetor(int n);
+void liberarVetor(int *V);
+void preencherVetorManual(int *V, int n, const char *nome);
+void preencherVetorAleatorio(int *V, int n, int limiteInferior, int limiteSuperior);
+void exibirVetor(int *V, int n, const char *nome);
+long long fatorial(int x);
+long long processarVetor(int *V, int n);
+
 /* ========================================================
    SEÇÃO 2: IMPLEMENTAÇÃO DAS FUNÇÕES
    ========================================================
@@ -235,8 +244,77 @@ int compararMatrizes3D(int ***A, int ***B, int n)
 
    ======================================================== */
 
-// Implementação da Função 4 aqui
+/* Aloca um vetor de tamanho n dinamicamente. */
+int *alocarVetor(int n)
+{
+  return (int *)malloc(n * sizeof(int));
+}
 
+void liberarVetor(int *V)
+{
+  free(V);
+}
+
+void preencherVetorManual(int *V, int n, const char *nome)
+{
+  printf("\nPreenchimento manual do vetor %s (%d elementos):\n", nome, n);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%s[%d] = ", nome, i);
+    scanf("%d", &V[i]);
+  }
+}
+
+void preencherVetorAleatorio(int *V, int n, int limiteInferior, int limiteSuperior)
+{
+  for (int i = 0; i < n; i++)
+  {
+    V[i] = limiteInferior + rand() % (limiteSuperior - limiteInferior + 1);
+  }
+}
+
+void exibirVetor(int *V, int n, const char *nome)
+{
+  printf("\nVetor %s:\n", nome);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", V[i]);
+  }
+  printf("\n");
+}
+
+/* Calcula o fatorial de x. Usado quando o elemento do vetor é ímpar. */
+long long fatorial(int x)
+{
+  long long resultado = 1;
+  for (int i = 2; i <= x; i++)
+  {
+    resultado *= i;
+  }
+  return resultado;
+}
+
+/* Núcleo da Função 4: percorre V, somando o valor se for par
+   ou o fatorial do valor se for ímpar. Complexidade: pior caso
+   O(n^2), quando todos os elementos são ímpares. */
+long long processarVetor(int *V, int n)
+{
+  long long somatorio = 0;
+
+  for (int i = 0; i < n; i++)
+  {
+    if (V[i] % 2 == 0)
+    {
+      somatorio += V[i];
+    }
+    else
+    {
+      somatorio += fatorial(V[i]);
+    }
+  }
+
+  return somatorio;
+}
 /* --------------------------------------------------------
    FUNÇÃO AUXILIAR: Busca Binária
 
@@ -365,8 +443,39 @@ int main()
     }
 
     case 4:
-      printf("\nFuncao 4 selecionada.\n");
-      break;
+{
+  printf("\nFuncao 4 selecionada.\n");
+
+  int n;
+  printf("Digite o valor de n (tamanho do vetor): ");
+  scanf("%d", &n);
+
+  int *V = alocarVetor(n);
+
+  int modo;
+  printf("Preenchimento (1 = Manual, 2 = Aleatorio): ");
+  scanf("%d", &modo);
+
+  if (modo == 1)
+  {
+    preencherVetorManual(V, n, "V");
+  }
+  else
+  {
+    preencherVetorAleatorio(V, n, 0, 20);
+  }
+
+  if (n <= 30)
+  {
+    exibirVetor(V, n, "V");
+  }
+
+  long long resultado = processarVetor(V, n);
+  printf("\nResultado (somatorio): %lld\n", resultado);
+
+  liberarVetor(V);
+  break;
+}
 
     case 5:
       printf("\nFuncao 5 selecionada.\n");
