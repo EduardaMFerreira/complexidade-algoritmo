@@ -104,22 +104,59 @@ Cálculo:
 3. FUNÇÃO 3 — COMPARAÇÃO DE MATRIZES TRIDIMENSIONAIS
 ====================================================================
 
-Responsável: NOME COMPLETO
+Responsável: LEANDRA LIMA DE SOUSA
 
 --------------------------------------------------------------------
 A) Pseudocódigo
 --------------------------------------------------------------------
 
+função compararMatrizes3D(A, B, n)
+    somaA ← 0
+    somaB ← 0
+    para i ← 0 até n-1 faça
+        para j ← 0 até n-1 faça
+            para k ← 0 até n-1 faça
+                somaA ← somaA + A[i][j][k]
+                somaB ← somaB + B[i][j][k]
+            fim para
+        fim para
+    fim para
+    se somaA ≥ somaB então
+        retorne 1
+    senão
+        retorne 0
+    fim se
+fim função
 
 --------------------------------------------------------------------
 B) Complexidade Linha a Linha
 --------------------------------------------------------------------
 
+Linha                                    | Operação                  | Execuções   | Custo
+------------------------------------------------------------------------------------------
+somaA ← 0                                | 1 atribuição               | 1           | 1
+somaB ← 0                                | 1 atribuição               | 1           | 1
+para i (controle do laço)                | teste + incremento         | n           | n
+para j (controle do laço)                | teste + incremento         | n x n       | n²
+para k (controle do laço)                | teste + incremento         | n x n x n   | n³
+somaA ← somaA + A[i][j][k]               | soma + atribuição (2 op)   | n³          | 2n³
+somaB ← somaB + B[i][j][k]               | soma + atribuição (2 op)   | n³          | 2n³
+se somaA ≥ somaB                         | comparação                 | 1           | 1
+retorne 1 / retorne 0                    | retorno                    | 1           | 1
 
 --------------------------------------------------------------------
 C) Expressão da Complexidade Total e Big O
 --------------------------------------------------------------------
 
+T(n) = 5n³ + n² + n + 4
+
+O termo dominante é 5n³, portanto:
+
+T(n) = O(n³)
+
+Complexidade cúbica, decorrente dos três laços aninhados que
+percorrem cada uma das n³ posições das matrizes tridimensionais
+A e B. 
 
 --------------------------------------------------------------------
 D) Cálculo de Tempo
@@ -132,6 +169,14 @@ Taxa de execução:
 10^8 instruções por segundo
 
 Cálculo:
+
+T(300) = 5(300)³ + (300)² + 300 + 4
+T(300) = 5(27.000.000) + 90.000 + 300 + 4
+T(300) = 135.000.000 + 90.304
+T(300) = 135.090.304 instruções
+
+Tempo = 135.090.304 / 10^8
+Tempo ≈ 1,35 segundos
 
 
 ====================================================================

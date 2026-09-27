@@ -17,8 +17,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
 /* ========================================================
    SEÇÃO 1: PROTÓTIPOS DAS FUNÇÕES
    ========================================================
@@ -38,8 +36,13 @@
 
    ======================================================== */
 
-
-
+/* --- Protótipos da Função 3 (Comparação de Matrizes Tridimensionais) --- */
+int ***alocarMatriz3D(int n);
+void liberarMatriz3D(int ***M, int n);
+void preencherManual3D(int ***M, int n, const char *nome);
+void preencherAleatorio3D(int ***M, int n, int limiteInferior, int limiteSuperior);
+void exibirMatriz3D(int ***M, int n, const char *nome);
+int compararMatrizes3D(int ***A, int ***B, int n);
 
 /* ========================================================
    SEÇÃO 2: IMPLEMENTAÇÃO DAS FUNÇÕES
@@ -63,7 +66,6 @@
 
    ======================================================== */
 
-
 /* --------------------------------------------------------
    FUNÇÃO 1: Contagem de Ocorrências Distintas
 
@@ -76,7 +78,6 @@
    ======================================================== */
 
 // Implementação da Função 1 aqui
-
 
 /* --------------------------------------------------------
    FUNÇÃO 2: Análise de Pares em Matriz Triangular
@@ -93,7 +94,6 @@
 
 // Implementação da Função 2 aqui
 
-
 /* --------------------------------------------------------
    FUNÇÃO 3: Comparação de Matrizes Tridimensionais
 
@@ -107,8 +107,118 @@
 
    ======================================================== */
 
-// Implementação da Função 3 aqui
+/* Aloca uma matriz n x n x n dinamicamente (heap), evitando
+   estourar a pilha para valores grandes de n. */
+int ***alocarMatriz3D(int n)
+{
+  int ***M = (int ***)malloc(n * sizeof(int **));
+  for (int i = 0; i < n; i++)
+  {
+    M[i] = (int **)malloc(n * sizeof(int *));
+    for (int j = 0; j < n; j++)
+    {
+      M[i][j] = (int *)malloc(n * sizeof(int));
+    }
+  }
+  return M;
+}
 
+void liberarMatriz3D(int ***M, int n)
+{
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      free(M[i][j]);
+    }
+    free(M[i]);
+  }
+  free(M);
+}
+
+/* Preenchimento manual: usuário digita cada elemento.
+   Recomendado apenas para n pequeno. */
+void preencherManual3D(int ***M, int n, const char *nome)
+{
+  printf("\nPreenchimento manual da matriz %s (%d x %d x %d):\n", nome, n, n, n);
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      for (int k = 0; k < n; k++)
+      {
+        printf("%s[%d][%d][%d] = ", nome, i, j, k);
+        scanf("%d", &M[i][j][k]);
+      }
+    }
+  }
+}
+
+/* Preenchimento aleatório dentro de um intervalo [limiteInferior, limiteSuperior]. */
+void preencherAleatorio3D(int ***M, int n, int limiteInferior, int limiteSuperior)
+{
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      for (int k = 0; k < n; k++)
+      {
+        M[i][j][k] = limiteInferior + rand() % (limiteSuperior - limiteInferior + 1);
+      }
+    }
+  }
+}
+
+/* Exibe a matriz. Só é chamada quando n é pequeno (ver main),
+   pois para n grande (ex.: 300) a impressão seria inviável. */
+void exibirMatriz3D(int ***M, int n, const char *nome)
+{
+  printf("\nMatriz %s:\n", nome);
+  for (int i = 0; i < n; i++)
+  {
+    printf("Camada %d:\n", i);
+    for (int j = 0; j < n; j++)
+    {
+      for (int k = 0; k < n; k++)
+      {
+        printf("%4d ", M[i][j][k]);
+      }
+      printf("\n");
+    }
+  }
+}
+
+/* Núcleo da Função 3: percorre A e B num único laço triplo,
+   acumulando as somas, e compara ao final. Complexidade O(n^3). */
+int compararMatrizes3D(int ***A, int ***B, int n)
+{
+  long long somaA = 0;
+  long long somaB = 0;
+
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      for (int k = 0; k < n; k++)
+      {
+        somaA += A[i][j][k];
+        somaB += B[i][j][k];
+      }
+    }
+  }
+
+  printf("\nSoma de A = %lld\n", somaA);
+  printf("Soma de B = %lld\n", somaB);
+
+  if (somaA >= somaB)
+  {
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
+}
 
 /* --------------------------------------------------------
    FUNÇÃO 4: Análise de Casos Assimétricos no Condicional
@@ -127,7 +237,6 @@
 
 // Implementação da Função 4 aqui
 
-
 /* --------------------------------------------------------
    FUNÇÃO AUXILIAR: Busca Binária
 
@@ -144,7 +253,6 @@
 
 // Implementação da Busca Binária aqui
 
-
 /* --------------------------------------------------------
    FUNÇÃO 5: Contagem de Elementos Presentes em Vetor Ordenado
 
@@ -160,10 +268,6 @@
    ======================================================== */
 
 // Implementação da Função 5 aqui
-
-
-
-
 
 /* ========================================================
    SEÇÃO 3: FUNÇÃO PRINCIPAL (MAIN) E MENU DO PROGRAMA
@@ -188,55 +292,95 @@
 
    ======================================================== */
 
-int main() {
-    int opcao;
+int main()
+{
+  int opcao;
+  srand((unsigned int)time(NULL));
 
-    do
+  do
+  {
+    printf("\n========================================\n");
+    printf("       MENU - AVALIACAO 01\n");
+    printf("========================================\n");
+    printf("1. Contagem de Ocorrencias Distintas\n");
+    printf("2. Analise de Pares em Matriz Triangular\n");
+    printf("3. Comparacao de Matrizes Tridimensionais\n");
+    printf("4. Analise de Casos Assimétricos no Condicional\n");
+    printf("5. Contagem de Elementos em Vetor Ordenado\n");
+    printf("0. Sair\n");
+    printf("========================================\n");
+    printf("Escolha uma opcao: ");
+    scanf("%d", &opcao);
+
+    switch (opcao)
     {
-        printf("\n========================================\n");
-        printf("       MENU - AVALIACAO 01\n");
-        printf("========================================\n");
-        printf("1. Contagem de Ocorrencias Distintas\n");
-        printf("2. Analise de Pares em Matriz Triangular\n");
-        printf("3. Comparacao de Matrizes Tridimensionais\n");
-        printf("4. Analise de Casos Assimétricos no Condicional\n");
-        printf("5. Contagem de Elementos em Vetor Ordenado\n");
-        printf("0. Sair\n");
-        printf("========================================\n");
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+    case 1:
+      printf("\nFuncao 1 selecionada.\n");
+      break;
 
-        switch (opcao)
-        {
-            case 1:
-                printf("\nFuncao 1 selecionada.\n");
-                break;
+    case 2:
+      printf("\nFuncao 2 selecionada.\n");
+      break;
 
-            case 2:
-                printf("\nFuncao 2 selecionada.\n");
-                break;
+    case 3:
+    {
+      printf("\nFuncao 3 selecionada.\n");
 
-            case 3:
-                printf("\nFuncao 3 selecionada.\n");
-                break;
+      int n;
+      printf("Digite o valor de n (dimensao das matrizes n x n x n): ");
+      scanf("%d", &n);
 
-            case 4:
-                printf("\nFuncao 4 selecionada.\n");
-                break;
+      int ***A = alocarMatriz3D(n);
+      int ***B = alocarMatriz3D(n);
 
-            case 5:
-                printf("\nFuncao 5 selecionada.\n");
-                break;
+      int modo;
+      printf("Preenchimento (1 = Manual, 2 = Aleatorio): ");
+      scanf("%d", &modo);
 
-            case 0:
-                printf("\nEncerrando o programa...\n");
-                break;
+      if (modo == 1)
+      {
+        preencherManual3D(A, n, "A");
+        preencherManual3D(B, n, "B");
+      }
+      else
+      {
+        preencherAleatorio3D(A, n, 0, 100);
+        preencherAleatorio3D(B, n, 0, 100);
+      }
 
-            default:
-                printf("\nOpcao invalida!\n");
-        }
+      /* Exibir só faz sentido para matrizes pequenas */
+      if (n <= 6)
+      {
+        exibirMatriz3D(A, n, "A");
+        exibirMatriz3D(B, n, "B");
+      }
 
-    } while (opcao != 0);
+      int resultado = compararMatrizes3D(A, B, n);
+      printf("\nResultado: %d (%s)\n", resultado,
+             resultado == 1 ? "soma(A) >= soma(B)" : "soma(A) < soma(B)");
 
-    return 0;
+      liberarMatriz3D(A, n);
+      liberarMatriz3D(B, n);
+      break;
+    }
+
+    case 4:
+      printf("\nFuncao 4 selecionada.\n");
+      break;
+
+    case 5:
+      printf("\nFuncao 5 selecionada.\n");
+      break;
+
+    case 0:
+      printf("\nEncerrando o programa...\n");
+      break;
+
+    default:
+      printf("\nOpcao invalida!\n");
+    }
+
+  } while (opcao != 0);
+
+  return 0;
 }
