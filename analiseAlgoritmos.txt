@@ -70,22 +70,68 @@ Cálculo:
 2. FUNÇÃO 2 — ANÁLISE DE PARES EM MATRIZ TRIANGULAR
 ====================================================================
 
-Responsável: NOME COMPLETO
+Responsável: Daniela Gomes de Oliveira
 
 --------------------------------------------------------------------
 A) Pseudocódigo
 --------------------------------------------------------------------
 
+função analisarParesMatriz(n, M)
+    contador ← 0
+    PARA i ← 0 ATÉ n - 1
+        PARA j ← i ATÉ n - 1
+            soma ← M[i][j] + M[j][i]
+            SE soma MOD 5 = 0
+                contador ← contador + 1
+            FIM SE
+        FIM PARA
+    FIM PARA
+    RETORNE contador
+fim função
 
 --------------------------------------------------------------------
 B) Complexidade Linha a Linha
 --------------------------------------------------------------------
 
+Linha                                  Complexidade
+1. contador ← 0                        1
+2. PARA i ← 0 ATÉ n - 1                n + 1
+3. PARA j ← i ATÉ n - 1                n(n+1)/2 + n
+4. soma ← M[i][j] + M[j][i]            n(n+1)/2
+5. SE soma MOD 5 = 0                   n(n+1)/2
+6. contador ← contador + 1             n(n+1)/2   (pior caso)
+7. RETORNE contador                    1
+
+Obs.: o laço interno roda (n - i) vezes para cada i, então
+Σ (n - i) de i=0 até n-1 = n + (n-1) + ... + 1 = n(n+1)/2.
+O cabeçalho da linha 3 é avaliado uma vez a mais por volta do
+laço externo (o teste que falha e encerra o laço), o que
+acrescenta n avaliações.
 
 --------------------------------------------------------------------
 C) Expressão da Complexidade Total e Big O
 --------------------------------------------------------------------
 
+Somando as linhas da tabela B (pior caso):
+
+T(n) = 1 + (n + 1) + [n(n+1)/2 + n] + 3 · n(n+1)/2 + 1
+
+T(n) = 4 · n(n+1)/2 + n + n + 3
+T(n) = 2n(n+1) + 2n + 3
+T(n) = 2n² + 2n + 2n + 3
+
+T(n) = 2n² + 4n + 3
+
+O termo de maior crescimento é n². As constantes são descartadas.
+
+T(n) = Θ(n²)
+
+Logo, a complexidade em Big O é:
+
+O(n²)
+
+(Melhor caso, se o SE nunca for verdadeiro:
+ T(n) = 1,5n² + 3,5n + 3, que também é O(n²).)
 
 --------------------------------------------------------------------
 D) Cálculo de Tempo
@@ -97,7 +143,20 @@ n = 500
 Taxa de execução:
 10^8 instruções por segundo
 
-Cálculo:
+T(500) = 2 · (500)² + 4 · 500 + 3
+       = 2 · 250.000 + 2.000 + 3
+       = 500.000 + 2.000 + 3
+       = 502.003 instruções
+
+Tempo = T(500) / taxa
+      = 502.003 / 10^8
+      = 5,02003 × 10^-3 segundos
+
+Tempo ≈ 0,00502 s ≈ 5,02 ms
+
+(Melhor caso: T(500) = 1,5 · 250.000 + 3,5 · 500 + 3
+            = 375.000 + 1.750 + 3 = 376.753 instruções
+ → 376.753 / 10^8 ≈ 3,77 ms)
 
 
 ====================================================================
