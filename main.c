@@ -35,6 +35,13 @@
    funções auxiliares necessárias para sua implementação.
 
    ======================================================== */
+/* --- Protótipos da Função 1 (Contagem de Ocorrências Distintas) --- */
+int contarOcorrenciasDistintas(int n, int A[n], int k, int B[k]);
+
+/* Auxiliares de preenchimento/impressão usadas pela Função 1 */
+void preencherVetorManualF1(int n, int V[n], const char *nome);
+void preencherVetorAleatorioF1(int n, int V[n], int limiteInferior, int limiteSuperior);
+void imprimirVetorF1(int n, int V[n], const char *nome);
 
 /* --- Protótipo da Função 2 (Análise de Pares em Matriz Triangular) --- */
 int analisarParesMatriz(int n, int M[n][n]);
@@ -99,7 +106,54 @@ int compararInt(const void *a, const void *b);
 
    ======================================================== */
 
-// Implementação da Função 1 aqui
+/* Percorre os k elementos buscados e, para cada um, conta quantas vezes
+   aparece no vetor principal A (n elementos). Retorna a soma das contagens.
+   Complexidade: O(n * k). */
+int contarOcorrenciasDistintas(int n, int A[n], int k, int B[k]) {
+   int total = 0;
+
+   for (int i = 0; i < k; i++) {         
+      for (int j = 0; j < n; j++) {      
+         if (A[j] == B[i]) {
+            total++;
+         }
+      }
+   }
+   return total;
+}
+/* --------------------------------------------------------
+   FUNÇÕES AUXILIARES DA FUNÇÃO 1
+   (preenchimento manual/aleatório e impressão dos vetores)
+   ======================================================== */
+
+void preencherVetorManualF1(int n, int V[n], const char *nome) {
+   printf("\nDigite os %d valores inteiros do vetor %s:\n", n, nome);
+
+   for (int i = 0; i < n; i++) {
+      printf("%s[%d]: ", nome, i);
+      scanf("%d", &V[i]);
+   }
+}
+
+void preencherVetorAleatorioF1(int n, int V[n], int limiteInferior, int limiteSuperior) {
+   for (int i = 0; i < n; i++) {
+      V[i] = limiteInferior + rand() % (limiteSuperior - limiteInferior + 1);
+   }
+}
+
+void imprimirVetorF1(int n, int V[n], const char *nome) {
+   int limite = (n > 50) ? 20 : n;
+
+   printf("\nVetor %s (n = %d):\n[ ", nome, n);
+
+   for (int i = 0; i < limite; i++) {
+      printf("%d ", V[i]);
+   }
+   if (limite < n) {
+      printf("... (exibindo os %d primeiros) ", limite);
+   }
+   printf("]\n");
+}
 
 /* --------------------------------------------------------
    FUNÇÃO 2: Análise de Pares em Matriz Triangular
@@ -485,8 +539,77 @@ int main()
     switch (opcao)
     {
     case 1:
+    {
       printf("\nFuncao 1 selecionada.\n");
+
+      int n, k, modo;
+
+      printf("Digite o tamanho n do vetor principal A: ");
+      scanf("%d", &n);
+      printf("Digite a quantidade k de elementos buscados (vetor B): ");
+      scanf("%d", &k);
+
+      if (n <= 0 || k <= 0)
+      {
+        printf("\nValores invalidos.\n");
+        break;
+      }
+
+      int *A = (int *)malloc(n * sizeof(int));
+      int *B = (int *)malloc(k * sizeof(int));
+
+      if (A == NULL || B == NULL)
+      {
+        printf("\nErro de alocacao de memoria.\n");
+        free(A);
+        free(B);
+        break;
+      }
+
+      printf("\nPreenchimento (1 = Manual, 2 = Aleatorio): ");
+      scanf("%d", &modo);
+
+      if (modo == 1)
+      {
+        preencherVetorManualF1(n, A, "A");
+        preencherVetorManualF1(k, B, "B");
+      }
+      else
+      {
+        int inf, sup;
+        printf("Limite inferior dos valores: ");
+        scanf("%d", &inf);
+        printf("Limite superior dos valores: ");
+        scanf("%d", &sup);
+
+        if (sup < inf)
+        {
+          int aux = inf;
+          inf = sup;
+          sup = aux;
+        }
+
+        preencherVetorAleatorioF1(n, A, inf, sup);
+        preencherVetorAleatorioF1(k, B, inf, sup);
+      }
+
+      imprimirVetorF1(n, A, "A");
+      imprimirVetorF1(k, B, "B");
+
+      clock_t inicio = clock();
+      int resultado = contarOcorrenciasDistintas(n, A, k, B);
+      clock_t fim = clock();
+
+      double segundos = (double)(fim - inicio) / CLOCKS_PER_SEC;
+
+      printf("\nSoma das ocorrencias: %d\n", resultado);
+      printf("Comparacoes realizadas: %lld\n", (long long)n * k);
+      printf("Tempo de execucao: %.6f segundos\n", segundos);
+
+      free(A);
+      free(B);
       break;
+    }
 
     case 2:
     {
