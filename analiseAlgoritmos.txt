@@ -35,22 +35,61 @@ D) Cálculo do tempo de execução considerando que o computador
 1. FUNÇÃO 1 — CONTAGEM DE OCORRÊNCIAS DISTINTAS
 ====================================================================
 
-Responsável: NOME COMPLETO
+Responsável: Thaís Rainara Marques de Morais
 
 --------------------------------------------------------------------
 A) Pseudocódigo
 --------------------------------------------------------------------
 
+FUNÇÃO contarOcorrenciasDistintas(n, A[n], k, B[k])
+1   total ← 0
+2   PARA i ← 0 ATÉ k - 1 FAÇA
+3       PARA j ← 0 ATÉ n - 1 FAÇA
+4           SE A[j] = B[i] ENTÃO
+5               total ← total + 1
+6           FIM SE
+7       FIM PARA
+8   FIM PARA
+9   RETORNE total
+FIM FUNÇÃO
 
 --------------------------------------------------------------------
 B) Complexidade Linha a Linha
 --------------------------------------------------------------------
 
+Considerando que cada operação simples (atribuição, comparação,
+incremento, retorno) custa 1 instrução, no pior caso (todos os
+elementos de A são iguais ao elemento buscado, e a linha 5 executa
+sempre):
+
+Linha 1  (total ← 0)                     : 1
+Linha 2  (laço externo)
+   inicialização de i                    : 1
+   teste de i < k                        : k + 1
+   incremento de i                       : k
+Linha 3  (laço interno, executa k vezes)
+   inicialização de j                    : k
+   teste de j < n                        : k(n + 1) = kn + k
+   incremento de j                       : kn
+Linha 4  (comparação A[j] = B[i])        : kn
+Linha 5  (total ← total + 1)             : kn   (pior caso)
+Linha 9  (retorno)                       : 1
 
 --------------------------------------------------------------------
 C) Expressão da Complexidade Total e Big O
 --------------------------------------------------------------------
 
+T(n, k) = 1 + 1 + (k + 1) + k + k + (kn + k) + kn + kn + kn + 1
+
+T(n, k) = 4kn + 4k + 4
+
+O termo dominante é 4kn. Descartando a constante multiplicativa e
+os termos de menor ordem:
+
+T(n, k) = O(n · k)
+
+Observação: se k crescer proporcionalmente a n, a função passa a
+ser O(n²).
 
 --------------------------------------------------------------------
 D) Cálculo de Tempo
@@ -65,6 +104,17 @@ Taxa de execução:
 
 Cálculo:
 
+T(n, k) = 4kn + 4k + 4
+T = 4 · 4.000 · 50.000 + 4 · 4.000 + 4
+T = 800.000.000 + 16.000 + 4
+T = 800.016.004 instruções
+
+Tempo = T / taxa
+Tempo = 800.016.004 / 10^8
+Tempo ≈ 8,0002 segundos
+
+Ou seja, aproximadamente 8 segundos (200.000.000 de comparações
+entre A[j] e B[i], com cerca de 4 instruções por iteração).
 
 ====================================================================
 2. FUNÇÃO 2 — ANÁLISE DE PARES EM MATRIZ TRIANGULAR
