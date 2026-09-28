@@ -183,22 +183,66 @@ Tempo ≈ 1,35 segundos
 4. FUNÇÃO 4 — ANÁLISE DE CASOS ASSIMÉTRICOS NO CONDICIONAL
 ====================================================================
 
-Responsável: NOME COMPLETO
+Responsável: ANA CLARA DE QUEIROZ ANDRADE
 
 --------------------------------------------------------------------
 A) Pseudocódigo
 --------------------------------------------------------------------
 
+função fatorial(x)
+    resultado ← 1
+    para i ← 2 até x faça
+        resultado ← resultado * i
+    fim para
+    retorne resultado
+fim função
+
+função processarVetor(V, n)
+    somatorio ← 0
+    para i ← 0 até n-1 faça
+        se V[i] mod 2 = 0 então
+            somatorio ← somatorio + V[i]
+        senão
+            somatorio ← somatorio + fatorial(V[i])
+        fim se
+    fim para
+    retorne somatorio
+fim função
 
 --------------------------------------------------------------------
 B) Complexidade Linha a Linha
 --------------------------------------------------------------------
 
+Linha                                    | Operação                  | Execuções   | Custo
+------------------------------------------------------------------------------------------
+somatorio ← 0                            | 1 atribuição               | 1           | 1
+para i (controle do laço)                | teste + incremento         | n           | n
+se V[i] mod 2 = 0 (teste)                | comparação                 | n           | n
+somatorio ← somatorio + V[i] (caso par)  | soma + atribuição (2 op)   | 0 a n       | até 2n
+chamada fatorial(V[i]) (caso ímpar)      | soma + atribuição (2 op)   | 0 a n       | até 2n
+  → laço interno do fatorial             | teste + incremento + mult  | até n       | até 3n (por chamada)
+retorne somatorio                        | retorno                    | 1           | 1
 
 --------------------------------------------------------------------
 C) Expressão da Complexidade Total e Big O
 --------------------------------------------------------------------
 
+O pior caso ocorre quando todos os n elementos são ímpares,
+forçando a chamada de fatorial() em toda iteração. Como o
+enunciado não define um limite separado para os valores do
+vetor, consideramos, por convenção didática, que o valor de
+cada elemento pode ser da mesma ordem de grandeza de n, ou
+seja, cada chamada a fatorial() custa O(n).
+
+T(n) = n · (c1 + c2·n) = c1·n + c2·n²
+
+O termo dominante é c2·n², portanto:
+
+T(n) = O(n²)
+
+Complexidade quadrática, decorrente do laço principal de
+tamanho n combinado ao custo O(n) do laço interno de
+fatorial() no pior caso (todos os elementos ímpares).
 
 --------------------------------------------------------------------
 D) Cálculo de Tempo
@@ -208,12 +252,18 @@ Entrada considerada:
 n = 50.000
 
 Cenário:
-Pior caso
+Pior caso (todos os elementos ímpares)
 
 Taxa de execução:
 10^8 instruções por segundo
 
 Cálculo:
+
+T(50.000) ≈ (50.000)²
+T(50.000) ≈ 2.500.000.000 instruções
+
+Tempo = 2.500.000.000 / 10^8
+Tempo = 25 segundos
 
 
 ====================================================================

@@ -44,14 +44,23 @@ void preencherAleatorio3D(int ***M, int n, int limiteInferior, int limiteSuperio
 void exibirMatriz3D(int ***M, int n, const char *nome);
 int compararMatrizes3D(int ***A, int ***B, int n);
 
+/* --- Protótipos da Função 4 (Análise de Casos Assimétricos / Fatorial) --- */
+int *alocarVetor(int n);
+void liberarVetor(int *V);
+void preencherVetorManual(int *V, int n, const char *nome);
+void preencherVetorAleatorio(int *V, int n, int limiteInferior, int limiteSuperior);
+void exibirVetor(int *V, int n, const char *nome);
+long long fatorial(int x);
+long long processarVetor(int *V, int n);
+
 /* --- Protótipos da Função 5 (Contagem de Elementos em Vetor Ordenado) --- */
 int buscaBinaria(int n, int B[n], int x);
 int contarElementosEmVetorOrdenado(int n, int A[n], int B[n]);
 
 /* Auxiliares de preenchimento/impressão usadas pela Função 5 */
-void preencherVetorManual(int n, int V[n]);
-void preencherVetorAleatorio(int n, int V[n]);
-void imprimirVetor(int n, int V[n], const char *nome);
+void preencherVetorManualOrdenado(int n, int V[n]);
+void preencherVetorAleatorioOrdenado(int n, int V[n]);
+void imprimirVetorOrdenado(int n, int V[n], const char *nome);
 int compararInt(const void *a, const void *b);
 
 /* ========================================================
@@ -245,8 +254,77 @@ int compararMatrizes3D(int ***A, int ***B, int n)
 
    ======================================================== */
 
-// Implementação da Função 4 aqui
+/* Aloca um vetor de tamanho n dinamicamente. */
+int *alocarVetor(int n)
+{
+  return (int *)malloc(n * sizeof(int));
+}
 
+void liberarVetor(int *V)
+{
+  free(V);
+}
+
+void preencherVetorManual(int *V, int n, const char *nome)
+{
+  printf("\nPreenchimento manual do vetor %s (%d elementos):\n", nome, n);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%s[%d] = ", nome, i);
+    scanf("%d", &V[i]);
+  }
+}
+
+void preencherVetorAleatorio(int *V, int n, int limiteInferior, int limiteSuperior)
+{
+  for (int i = 0; i < n; i++)
+  {
+    V[i] = limiteInferior + rand() % (limiteSuperior - limiteInferior + 1);
+  }
+}
+
+void exibirVetor(int *V, int n, const char *nome)
+{
+  printf("\nVetor %s:\n", nome);
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d ", V[i]);
+  }
+  printf("\n");
+}
+
+/* Calcula o fatorial de x. Usado quando o elemento do vetor é ímpar. */
+long long fatorial(int x)
+{
+  long long resultado = 1;
+  for (int i = 2; i <= x; i++)
+  {
+    resultado *= i;
+  }
+  return resultado;
+}
+
+/* Núcleo da Função 4: percorre V, somando o valor se for par
+   ou o fatorial do valor se for ímpar. Complexidade: pior caso
+   O(n^2), quando todos os elementos são ímpares. */
+long long processarVetor(int *V, int n)
+{
+  long long somatorio = 0;
+
+  for (int i = 0; i < n; i++)
+  {
+    if (V[i] % 2 == 0)
+    {
+      somatorio += V[i];
+    }
+    else
+    {
+      somatorio += fatorial(V[i]);
+    }
+  }
+
+  return somatorio;
+}
 /* --------------------------------------------------------
    FUNÇÃO AUXILIAR: Busca Binária
 
@@ -312,7 +390,7 @@ int contarElementosEmVetorOrdenado(int n, int A[n], int B[n]) {
     da busca binária)
    ======================================================== */
 
-void preencherVetorManual(int n, int V[n]) {
+void preencherVetorManualOrdenado(int n, int V[n]) {
    printf("\nDigite os %d valores inteiros:\n", n);
    
    for (int i = 0; i < n; i++) {
@@ -321,7 +399,7 @@ void preencherVetorManual(int n, int V[n]) {
    }
 }
 
-void preencherVetorAleatorio(int n, int V[n]) {
+void preencherVetorAleatorioOrdenado(int n, int V[n]) {
    for (int i = 0; i < n; i++) {
       V[i] = rand() % 100; // valores entre 0 e 99
    }
@@ -331,7 +409,7 @@ int compararInt(const void *a, const void *b) {
    return (*(int *)a - *(int *)b);
 }
 
-void imprimirVetor(int n, int V[n], const char *nome) {
+void imprimirVetorOrdenado(int n, int V[n], const char *nome) {
    printf("\nVetor %s (n = %d):\n[ ", nome, n);
    
    for (int i = 0; i < n; i++) {
@@ -436,8 +514,39 @@ int main()
     }
 
     case 4:
+    {
       printf("\nFuncao 4 selecionada.\n");
+
+      int n;
+      printf("Digite o valor de n (tamanho do vetor): ");
+      scanf("%d", &n);
+
+      int *V = alocarVetor(n);
+
+      int modo;
+      printf("Preenchimento (1 = Manual, 2 = Aleatorio): ");
+      scanf("%d", &modo);
+
+      if (modo == 1)
+      {
+        preencherVetorManual(V, n, "V");
+      }
+      else
+      {
+        preencherVetorAleatorio(V, n, 0, 20);
+      }
+
+      if (n <= 30)
+      {
+        exibirVetor(V, n, "V");
+      }
+
+      long long resultado = processarVetor(V, n);
+      printf("\nResultado (somatorio): %lld\n", resultado);
+
+      liberarVetor(V);
       break;
+    }
 
     case 5:
     {
@@ -455,15 +564,14 @@ int main()
       do {
         printf("Escolha: ");
         scanf("%d", &modo);
-        if (modo != 1 && modo != 2)
-        {
+        if (modo != 1 && modo != 2) {
           printf("Opcao invalida! Digite 1 ou 2.\n");
         }
       } while (modo != 1 && modo != 2);
       if (modo == 1) {
-        preencherVetorManual(n, A);
+        preencherVetorManualOrdenado(n, A);
       } else {
-        preencherVetorAleatorio(n, A);
+        preencherVetorAleatorioOrdenado(n, A);
       }
 
       printf("\nVetor B (sera ordenado antes da busca) -> como deseja preenche-lo?\n");
@@ -476,17 +584,17 @@ int main()
         }
       } while (modo != 1 && modo != 2);
       if (modo == 1) {
-        preencherVetorManual(n, B);
+        preencherVetorManualOrdenado(n, B);
       }
       else {
-        preencherVetorAleatorio(n, B);
+        preencherVetorAleatorioOrdenado(n, B);
       }
 
       // Garante que B esteja ordenado, como exige a Funcao 5
       qsort(B, n, sizeof(int), compararInt);
 
-      imprimirVetor(n, A, "A");
-      imprimirVetor(n, B, "B (ordenado)");
+      imprimirVetorOrdenado(n, A, "A");
+      imprimirVetorOrdenado(n, B, "B (ordenado)");
 
       int resultado = contarElementosEmVetorOrdenado(n, A, B);
       printf("\nTotal de elementos de A encontrados em B: %d\n", resultado);
