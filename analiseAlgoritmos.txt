@@ -270,7 +270,7 @@ Tempo = 25 segundos
 5. FUNÇÃO 5 — CONTAGEM DE ELEMENTOS EM VETOR ORDENADO
 ====================================================================
 
-Responsável: NOME COMPLETO
+Responsável: MARIA EDUARDA DE MOURA FERREIRA
 
 Observação:
 Esta função utiliza uma função auxiliar de Busca Binária para
@@ -280,16 +280,86 @@ verificar se cada elemento do vetor A está presente no vetor B.
 A) Pseudocódigo
 --------------------------------------------------------------------
 
+FUNÇÃO buscaBinaria(B, n, x)
+    inicio = 0
+    fim = n - 1
+
+    PARA (inicio, fim já iniciados); inicio <= fim FAÇA
+        meio = (inicio + fim) / 2
+
+        SE B[meio] = x ENTÃO
+            RETORNE 1
+        SENÃO SE B[meio] < x ENTÃO
+            inicio = meio + 1
+        SENÃO
+            fim = meio - 1
+        FIM SE
+    FIM PARA
+
+    RETORNE 0
+FIM FUNÇÃO
+
+
+FUNÇÃO contarElementosEmVetorOrdenado(A, B, n)
+    total = 0
+
+    PARA i DE 0 ATÉ n-1 FAÇA
+        SE buscaBinaria(B, n, A[i]) = 1 ENTÃO
+            total = total + 1
+        FIM SE
+    FIM PARA
+
+    RETORNE total
+FIM FUNÇÃO
 
 --------------------------------------------------------------------
 B) Complexidade Linha a Linha
 --------------------------------------------------------------------
 
+** Função auxiliar buscaBinaria(B, n, x) **
+(pior caso: elemento não encontrado, o laço executa até esgotar o
+intervalo de busca, o que leva t = floor(log2 n) + 1 iterações)
+
+Linha                                          Operações
+------------------------------------------------------------------
+inicio = 0                                     1
+fim = n - 1                                    1
+PARA inicio <= fim  (teste do laço)            t + 1
+    meio = (inicio + fim) / 2                  t
+    SE B[meio] = x       (teste)               t
+    SENÃO SE B[meio] < x (teste)               t
+    inicio = meio + 1  OU  fim <- meio - 1     t
+RETORNE 0                                      1
+
+Total de operações da busca binária:
+Tb(n) = 4 + 4t, onde t = floor(log2 n) + 1
+Logo Tb(n) = O(log n)
+
+** Função contarElementosEmVetorOrdenado(A, B, n) **
+
+Linha                                          Operações
+------------------------------------------------------------------
+total = 0                                      1
+PARA i DE 0 ATÉ n-1  (teste do laço)           n + 1
+    chamada buscaBinaria(B, n, A[i])           n * Tb(n)
+    SE buscaBinaria(...) = 1  (teste)          n
+    total = total + 1  (pior caso: sempre)     n
+RETORNE total                                  1
 
 --------------------------------------------------------------------
 C) Expressão da Complexidade Total e Big O
 --------------------------------------------------------------------
 
+Somando as operações da função principal com as n chamadas à busca
+binária (cada uma custando Tb(n) = 4 + 4*(log2 n + 1)):
+
+T(n) = 3 + 2n + n * Tb(n)
+T(n) = 3 + 2n + n * (4*log2(n) + 8)
+T(n) = 4n*log2(n) + 10n + 3
+
+O termo dominante é 4n*log2(n), portanto:
+
+Big O: O(n log n)
 
 --------------------------------------------------------------------
 D) Cálculo de Tempo
@@ -302,6 +372,22 @@ Taxa de execução:
 10^8 instruções por segundo
 
 Cálculo:
+
+Usando a expressão de complexidade (considerando o termo dominante
+n*log2(n), como é padrão para a estimativa de tempo em Big O):
+
+log2(n) = log2(10.000.000) ≈ 23,25
+
+Número de operações ≈ n * log2(n)
+                    ≈ 10.000.000 * 23,25
+                    ≈ 232.500.000 operações (≈ 2,325 x 10^8)
+
+Tempo estimado = Número de operações / Taxa de execução
+               = 2,325 x 10^8 / 10^8
+               ≈ 2,33 segundos
+
+Portanto, para n = 10.000.000, a Função 5 (com a busca binária
+auxiliar) levaria aproximadamente 2,33 segundos para ser executada.
 
 
 ====================================================================
